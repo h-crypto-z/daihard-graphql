@@ -1,0 +1,23 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DAIHardFactory
+    network: mainnet
+    source:
+      address: "0x484c3A51a794D37939cf76CD176559c8e1614D74"
+      abi: DAIHardFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - NewTrade
+      abis:
+        - name: DAIHardFactory
+          file: ./abis/DAIHardFactory.json
+      eventHandlers:
+        - event: NewTrade(uint256,address,indexed address)
+          handler: handleNewTrade
+      file: ./src/mapping.ts
